@@ -17,7 +17,8 @@ namespace cereal
     {
         static void Main(string[] args)
         {
-            SerialPort sp = new SerialPort("COM9", 9600, Parity.None, 8, StopBits.One);
+            string port = "COM6";
+            SerialPort sp = new SerialPort(port, 9600, Parity.None, 8, StopBits.One);
 
             // Declare an event handler to fire on data received.
             sp.DataReceived += sp_DataReceived;
@@ -28,14 +29,14 @@ namespace cereal
                 if (sp.IsOpen == true) sp.Close();
                 sp.Open();
 
-                Console.WriteLine("Port opened.");                
+                Console.WriteLine("Port {0} opened.", port);                
 
                 sp.ReadTimeout = 1000;
 
                 // An indefinite loop to get user input.
-                while (true) 
+                while (true)
                 {
-                    Console.Write("Enter a command ('?', 'get', 'exit'): "); // Prompt
+                    Console.Write("Enter a command ('?', 'v', 'exit'): "); // Prompt
                     string input = Console.ReadLine(); // Get the input string
 
                     if (input == "exit")
