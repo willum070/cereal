@@ -17,7 +17,7 @@ namespace cereal
     {
         static void Main(string[] args)
         {
-            string port = "COM6";
+            string port = "COM8";
             SerialPort sp = new SerialPort(port, 9600, Parity.None, 8, StopBits.One);
 
             // Declare an event handler to fire on data received.

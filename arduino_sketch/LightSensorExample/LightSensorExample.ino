@@ -6,13 +6,9 @@
 int temt6000Pin = 0;
 int numCharRead = 0;
 char incomingData[20];
-//int value = analogRead(temt6000Pin);
 
 // the setup routine runs once when you press reset:
 void setup() {                
-    // initialize the digital pin as an output.
-    //pinMode(led, OUTPUT);  
-  
     //Setup the serial port
     Serial.begin(9600);
 }
@@ -23,12 +19,18 @@ void loop() {
         numCharRead = Serial.readBytesUntil(']',  incomingData, 19);
         processCommands(numCharRead);        
     }
+    
+    // Use the loop to send continuous data.
+    //sendTemps();
+    // Delay by 100 milliseconds to make reading easier.
+    //delay(100);
 }
 
+// Send out a reading.
 void sendTemps() {
-  Serial.print('[');
+  Serial.print("[");
   Serial.print(analogRead(temt6000Pin));
-  Serial.println(']');
+  Serial.print("]");
 }
 
 int processCommands(int numCharRead ) {
@@ -51,11 +53,9 @@ int processCommands(int numCharRead ) {
          Serial.print("[MyArduino_1234567890]");
         break;
         
-        ///ADD COMMANDS RELEVANT TO YOUR DEVICE & DRIVER HERE
-        //example for dummy
         case 'v':
          Serial.print('[');
-         Serial.print('value');
+         Serial.print(analogRead(temt6000Pin));
          Serial.print(']');     
          break;
         
