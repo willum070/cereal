@@ -48,7 +48,7 @@ namespace cereal
                     sp.Write("[" + input + "]");
 
                     // Pause for 2 seconds to wait for response. Quick and dirty!
-                    Thread.Sleep(2000);
+                    //Thread.Sleep(2000);
                 }                
             }
             catch (Exception ex)
