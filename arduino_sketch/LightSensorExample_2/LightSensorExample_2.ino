@@ -20,6 +20,12 @@ void loop() {
         numCharRead = Serial.readBytesUntil(']',  incomingData, 19);
         processCommands(numCharRead);        
     }
+    
+    // Send continuously if the 'stream' flag is set to 'true'.
+    if(stream) {
+      sendReading();
+      delay(100);
+    }
 }
 
 // Send out a reading.
@@ -53,6 +59,14 @@ int processCommands(int numCharRead ) {
          Serial.print('[');
          Serial.print(analogRead(temt6000Pin));
          Serial.print(']');     
+         break;
+         
+       // Toggle continuous data.  
+       case 's':
+         if(!stream)
+           stream = true;
+         else
+           stream = false;
          break;
          
         default:
